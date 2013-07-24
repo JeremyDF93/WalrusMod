@@ -14,7 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import co.thewalrus.walrusmod.command.CommandHandler;
 import co.thewalrus.walrusmod.command.CommandMail;
+import co.thewalrus.walrusmod.command.CommandTeleport;
 import co.thewalrus.walrusmod.command.CommandWalrusMod;
+import co.thewalrus.walrusmod.command.CommandWarp;
 import co.thewalrus.walrusmod.listener.PlayerListener;
 import co.thewalrus.walrusmod.listener.ServerListener;
 
@@ -27,6 +29,7 @@ public class WalrusMod extends JavaPlugin {
 
 	private SandboxTimer sandboxTimer = new SandboxTimer(this);
 	private MailManager mailManager = new MailManager(this);
+	private WarpManager warpManager = new WarpManager(this);
 
 	@Override
 	public void onEnable() {
@@ -50,7 +53,8 @@ public class WalrusMod extends JavaPlugin {
 
 		commandHandler.registerCommand(new CommandWalrusMod(this));
 		commandHandler.registerCommand(new CommandMail(this));
-		// commandHandler.registerCommand(new CommandTeleport(this));
+		commandHandler.registerCommand(new CommandWarp(this));
+		commandHandler.registerCommand(new CommandTeleport(this));
 	}
 
 	@Override
@@ -68,6 +72,10 @@ public class WalrusMod extends JavaPlugin {
 
 	public MailManager getMailManager() {
 		return mailManager;
+	}
+
+	public WarpManager getWarpManager() {
+		return warpManager;
 	}
 
 	public SandboxTimer getSandboxTimer() {

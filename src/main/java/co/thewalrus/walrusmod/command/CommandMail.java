@@ -40,7 +40,7 @@ public class CommandMail extends CommandBase {
 			if (args[0].equalsIgnoreCase("send")) {
 				if (sender.hasPermission(this.getPermissionName() + ".send")) {
 					if (args.length >= 3) {
-						mailManager.sendMail(player, args[1], this.getString(args, 2, false));
+						mailManager.sendMail(player, args[1], this.getString(args, 2));
 						player.sendMessage(ChatColor.YELLOW + "Mail sent to " + ChatColor.GREEN + args[1]);
 
 						Player target = plugin.getServer().getPlayer(args[1]);

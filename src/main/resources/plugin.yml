@@ -3,9 +3,18 @@ main: co.thewalrus.walrusmod.WalrusMod
 version: 0.0.1a
 
 commands:
-  walrusmod:
-    description: It's a walrus!
-    usage: /walrusmod
   mail:
     description: Send and receive mail to and from players.
     usage: /mail <send|read|clear|check>
+    aliases: mailx
+  tp:
+    description: tp
+    usage: /tp [target player] <destination player> OR /tp [target player] <x> <y> <z>
+    aliases: tpx
+  walrusmod:
+    description: It's a walrus!
+    usage: /walrusmod
+  warp:
+    description: warps
+    usage: /warp <add|remove|list>
+    aliases: warpx

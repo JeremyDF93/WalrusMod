@@ -67,7 +67,7 @@ public abstract class CommandBase {
 		if (player != null) {
 			return player;
 		} else {
-			throw new CommandException("Can't find player " + name);
+			throw new CommandException(String.format("Can't find player %s", name));
 		}
 	}
 
@@ -87,15 +87,24 @@ public abstract class CommandBase {
 		}
 	}
 
-	public String getString(String[] args, int index, boolean list) {
+	public String getString(String[] args, int index) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = index; i < args.length; ++i) {
 			if (i > index) {
-				if (list) {
-					builder.append(", ");
-				} else {
-					builder.append(" ");
-				}
+				builder.append(" ");
+			}
+
+			builder.append(args[i]);
+		}
+
+		return builder.toString();
+	}
+
+	public String getStringList(String[] args, int index) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = index; i < args.length; ++i) {
+			if (i > index) {
+				builder.append(", ");
 			}
 
 			builder.append(args[i]);
