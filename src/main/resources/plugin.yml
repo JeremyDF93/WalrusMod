@@ -1,0 +1,11 @@
+name: WalrusMod
+main: co.thewalrus.walrusmod.WalrusMod
+version: 0.0.1a
+
+commands:
+  walrusmod:
+    description: It's a walrus!
+    usage: /walrusmod
+  mail:
+    description: Send and receive mail to and from players.
+    usage: /mail <send|read|clear|check>
