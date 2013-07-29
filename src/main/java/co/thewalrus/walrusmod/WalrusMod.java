@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,10 +36,6 @@ public class WalrusMod extends JavaPlugin {
 	public void onEnable() {
 		this.saveDefaultConfig();
 
-		if (!this.getDataFolder().exists()) {
-			this.getDataFolder().mkdir();
-		}
-
 		if (this.isSandbox()) {
 			sandboxTimer.runTaskTimer(this, 30, 30);
 			sandboxTimer.setSize(this.getConfig().getInt("sandbox-size", 2000));
@@ -63,6 +60,10 @@ public class WalrusMod extends JavaPlugin {
 	}
 
 	public void addPermission(Permission permission) {
+		if (this.getConfig().getBoolean("no-op-permissions", false) && permission.getDefault().equals(PermissionDefault.OP)) {
+			permission.setDefault(PermissionDefault.FALSE);
+		}
+
 		this.getServer().getPluginManager().addPermission(permission);
 	}
 

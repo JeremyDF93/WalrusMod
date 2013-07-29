@@ -9,6 +9,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import co.thewalrus.walrusmod.WalrusMod;
@@ -17,10 +18,10 @@ import co.thewalrus.walrusmod.command.exception.WrongUsageException;
 public class CommandWarp extends CommandBase {
 	public CommandWarp(WalrusMod plugin) {
 		super(plugin);
-		this.addPermission(this.getPermission("add", PermissionDefault.OP));
-		this.addPermission(this.getPermission("remove", PermissionDefault.OP));
-		this.addPermission(this.getPermission("list", PermissionDefault.TRUE));
-		this.addPermission(this.getPermission("other", PermissionDefault.TRUE));
+		this.addPermission(new Permission(this.getPermissionName() + ".add", PermissionDefault.OP));
+		this.addPermission(new Permission(this.getPermissionName() + ".remove", PermissionDefault.OP));
+		this.addPermission(new Permission(this.getPermissionName() + ".list", PermissionDefault.TRUE));
+		this.addPermission(new Permission(this.getPermissionName() + ".other", PermissionDefault.OP));
 	}
 
 	@Override

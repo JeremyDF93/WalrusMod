@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import co.thewalrus.walrusmod.WalrusMod;
@@ -15,8 +16,8 @@ import co.thewalrus.walrusmod.command.exception.WrongUsageException;
 public class CommandTeleport extends CommandBase {
 	public CommandTeleport(WalrusMod plugin) {
 		super(plugin);
-		this.addPermission(this.getPermission("other", PermissionDefault.OP));
-		this.addPermission(this.getPermission("pos", PermissionDefault.OP));
+		this.addPermission(new Permission(this.getPermissionName() + ".pos", PermissionDefault.OP));
+		this.addPermission(new Permission(this.getPermissionName() + ".other", PermissionDefault.OP));
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class CommandTeleport extends CommandBase {
 					double y = this.getCoordinate(sender, location.getY(), args[i++], 0, 0);
 					double z = this.getCoordinate(sender, location.getZ(), args[i++]);
 
-					player.teleport(new Location(player.getWorld(), x, y, z));
+					player.teleport(new Location(player.getWorld(), x, y, z, location.getYaw(), location.getPitch()));
 					this.notifyAdmins(sender, String.format("Teleported %s to %.2f,%.2f,%.2f", player.getName(), x, y, z));
 				} else {
 					throw new CommandException("You do not have permission to use this command");

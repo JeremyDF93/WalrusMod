@@ -22,7 +22,7 @@ public abstract class CommandBase {
 
 	public CommandBase(WalrusMod plugin) {
 		this.plugin = plugin;
-		this.addPermission(this.getPermission());
+		this.addPermission(new Permission(this.getPermissionName(), this.getPermissionDefault()));
 	}
 
 	public abstract String getName();
@@ -35,22 +35,6 @@ public abstract class CommandBase {
 
 	public void addPermission(Permission permission) {
 		plugin.addPermission(permission);
-	}
-
-	public Permission getPermission() {
-		if (plugin.getConfig().getBoolean("no-op-permissions", false) && this.getPermissionDefault().equals(PermissionDefault.OP)) {
-			return new Permission(this.getPermissionName(), PermissionDefault.FALSE);
-		}
-
-		return new Permission(this.getPermissionName(), this.getPermissionDefault());
-	}
-
-	public Permission getPermission(String name, PermissionDefault permissionDefault) {
-		if (plugin.getConfig().getBoolean("no-op-permissions", false) && permissionDefault.equals(PermissionDefault.OP)) {
-			return new Permission(this.getPermissionName() + "." + name, PermissionDefault.FALSE);
-		}
-
-		return new Permission(this.getPermissionName() + "." + name, permissionDefault);
 	}
 
 	public PermissionDefault getPermissionDefault() {

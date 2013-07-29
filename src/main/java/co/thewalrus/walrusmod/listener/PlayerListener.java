@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import co.thewalrus.walrusmod.WalrusMod;
@@ -32,6 +33,20 @@ public class PlayerListener implements Listener {
 			int size = plugin.getSandboxTimer().getSize();
 			if (location.getX() > size || location.getX() < -size || location.getZ() > size || location.getZ() < -size) {
 				player.sendMessage(ChatColor.RED + "You cannot teleport here");
+				event.setCancelled(true);
+			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerPortal(PlayerPortalEvent event) {
+		if (plugin.isSandbox()) {
+			Player player = event.getPlayer();
+			Location location = event.getTo();
+
+			int size = plugin.getSandboxTimer().getSize();
+			if (location.getX() > size || location.getX() < -size || location.getZ() > size || location.getZ() < -size) {
+				player.sendMessage(ChatColor.RED + "You cannot make a portal here");
 				event.setCancelled(true);
 			}
 		}

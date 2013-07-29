@@ -8,6 +8,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import co.thewalrus.walrusmod.MailManager;
@@ -17,7 +18,7 @@ import co.thewalrus.walrusmod.command.exception.WrongUsageException;
 public class CommandMail extends CommandBase {
 	public CommandMail(WalrusMod plugin) {
 		super(plugin);
-		this.addPermission(this.getPermission("send", PermissionDefault.TRUE));
+		this.addPermission(new Permission(this.getPermissionName() + ".send", PermissionDefault.TRUE));
 	}
 
 	@Override
